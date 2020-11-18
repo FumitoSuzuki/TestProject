@@ -21,7 +21,6 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     { src: '~/plugins/window' },
-    // { src: '~/plugins/getImage' },
     { src: '~/plugins/aos', ssr: false },
     { src: '~/plugins/validate' },
     { src: '~/plugins/contentful.js' },
