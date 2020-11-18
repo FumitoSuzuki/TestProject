@@ -14,7 +14,7 @@ export default {
     breadcrumb() {
       return [
         { text: 'Top', to: '/' },
-        { text: 'Posts', to: '/posts/' },
+        { text: 'Articles', to: '/articles/' },
         { text: this.pageNumber, active: true },
       ]
     },
