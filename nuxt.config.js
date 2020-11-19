@@ -16,7 +16,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
+  css: [{ src: 'prism-themes/themes/prism-material-oceanic.css', lang: 'css' }],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
@@ -52,11 +52,19 @@ export default {
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
 
+  // Markdown parser done right (https://github.com/markdown-it/markdown-it)
+  markdownit: {
+    html: true,
+    injected: true,
+    // use: ['markdown-it-highlightjs'],
+    use: ['markdown-it-prism'],
+  },
+
   // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {
     markdown: {
       prism: {
-        theme: 'prism-themes/themes/prism-material-oceanic.css',
+        theme: false,
       },
     },
   },
