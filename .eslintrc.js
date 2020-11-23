@@ -16,5 +16,13 @@ module.exports = {
   ],
   plugins: ['prettier'],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'prettier/prettier': ['error'],
+    'no-unused-vars': 'off',
+    'no-multiple-empty-lines': ['warn', { max: 1 }],
+    'object-shorthand': ['error', 'always', { avoidQuotes: true }],
+    camelcase: ['error', { ignoreImports: true, properties: 'never' }],
+  },
 }
