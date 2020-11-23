@@ -1,63 +1,51 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">TestProject</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+  <section id="main">
+    <FullsizeBox class="p-2">
+      <Introduction class="text-center">
+        <template #header></template>
+        <template #body>
+          <nuxt-content :document="intro" />
+        </template>
+        <template #footer>
+          <Logo :width="60" :height="60" />
+        </template>
+      </Introduction>
+    </FullsizeBox>
+    <article>
+      <LeadCopy class="my-3">
+        <nuxt-content :document="leadcopy" />
+      </LeadCopy>
+      <Characters :contents="characters" />
+      <Topics :rows="topics" />
+      <Others :contents="others" class="my-3" />
+    </article>
+    <aside class="bg-info py-5">
+      <Information />
+    </aside>
+  </section>
 </template>
 
 <script>
-export default {}
+export default {
+  async asyncData({ $content }) {
+    const intro = await $content('introduction').fetch()
+    const leadcopy = await $content('leadcopy').fetch()
+    const characters = await $content('characters').sortBy('slug').fetch()
+    const topics = await $content('topics').sortBy('slug').fetch()
+    const others = await $content('others').fetch()
+    return {
+      intro,
+      leadcopy,
+      characters,
+      topics: [topics.splice(0, 2), topics],
+      others,
+    }
+  },
+}
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+<style scoped>
+#main {
+  background-color: white;
 }
 </style>
