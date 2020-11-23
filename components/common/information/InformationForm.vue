@@ -101,11 +101,10 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
-      this.$axios.post('/', encodeForm, axiosConfig).then(() => {
-        this.$bvModal.hide('confirm')
-        this.$bvModal.show('thanks')
-        this.onReset()
-      })
+      this.$axios.post('/', encodeForm, axiosConfig)
+      this.$bvModal.hide('confirm')
+      this.$bvModal.show('thanks')
+      this.onReset()
     },
     onFihish() {
       this.$bvModal.hide('thanks')
