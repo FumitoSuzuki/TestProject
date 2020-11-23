@@ -16,14 +16,16 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [{ src: 'prism-themes/themes/prism-material-oceanic.css', lang: 'css' }],
+  // css: [{ src: 'prism-themes/themes/prism-material-oceanic.css', lang: 'css' }],
+  css: [{ src: '~/node_modules/highlight.js/styles/ocean.css', lang: 'css' }],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     { src: '~/plugins/window' },
     { src: '~/plugins/aos', ssr: false },
     { src: '~/plugins/validate' },
-    { src: '~/plugins/contentful.js' },
+    { src: '~/plugins/contentful' },
+    { src: '~/plugins/prism' },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -54,18 +56,25 @@ export default {
 
   // Markdown parser done right (https://github.com/markdown-it/markdown-it)
   markdownit: {
-    html: true,
+    preset: 'default',
     injected: true,
+    breaks: true,
+    html: true,
+    linkify: true,
+    typography: true,
+    xhtmlOut: true,
+    langPrefix: 'language-',
+    quotes: '“”‘’',
+    highlight: function (/*str, lang*/) {
+      return ''
+    },
     // use: ['markdown-it-highlightjs'],
-    use: ['markdown-it-prism'],
   },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {
     markdown: {
-      prism: {
-        theme: false,
-      },
+      prism: { theme: false },
     },
   },
 

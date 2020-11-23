@@ -1,15 +1,24 @@
 <template>
-  <article v-html="markdown" />
+  <article v-html="renderMd" />
 </template>
 
 <script>
+import Prism from '~/plugins/prism'
 export default {
-  props: ['markdown'],
+  props: ['md'],
+  mounted() {
+    Prism.highlightAll()
+  },
+  computed: {
+    renderMd() {
+      return this.$md.render(this.md)
+    },
+  },
 }
 </script>
 
 <style>
-blockquote {
+/* blockquote {
   background: var(--light);
   border-left: 0.5rem solid var(--info);
   padding: 1rem;
@@ -17,5 +26,5 @@ blockquote {
 blockquote > p {
   margin: auto;
   color: darkslategrey;
-}
+} */
 </style>

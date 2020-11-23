@@ -4,7 +4,7 @@
       <b-card-img top :src="item.introduct.file.url" />
     </client-only>
     <b-card-body>
-      <nuxt-link :to="`/posts/entry/` + item.id" class="text-info">
+      <nuxt-link :to="`/articles/entry/${item.id}`" class="text-info">
         <b-card-title class="title">{{ item.title }}</b-card-title>
       </nuxt-link>
       <b-card-text class="text text-secondary">

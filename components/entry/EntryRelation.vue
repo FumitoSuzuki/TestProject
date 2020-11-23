@@ -4,7 +4,7 @@
       v-for="(item, key) in relations"
       :key="key"
       :to="item.id"
-      variant="info"
+      variant="secondary"
       class="flex-column align-items-start"
     >
       <div class="d-flex w-100 justify-content-between">

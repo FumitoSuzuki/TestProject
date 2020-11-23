@@ -8,3 +8,6 @@ export default {
   ssr: true // default value
 }
 ```
+```
+text sample text sample
+```

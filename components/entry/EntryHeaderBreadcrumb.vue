@@ -22,3 +22,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.breadcrumb-item a {
+  color: var(--white);
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  color: white;
+}
+.breadcrumb-item.active {
+  color: white;
+}
+</style>

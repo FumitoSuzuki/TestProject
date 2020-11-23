@@ -5,6 +5,8 @@
       :key="key"
       class="m-1"
       @click="delTag(item.slug)"
+      style="cursor: pointer"
+      variant="light"
     >
       # {{ item.name }}
     </b-badge>
@@ -12,6 +14,7 @@
       v-b-modal.select-tags
       class="m-1"
       style="cursor: pointer"
+      variant="light"
       v-text="' + '"
     />
     <b-modal

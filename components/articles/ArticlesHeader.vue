@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="text-center bg-info p-5">
+  <b-container fluid class="text-center bg-secondary p-5">
     <b-row class="mb-3">
       <b-col>
         <slot name="title" />
