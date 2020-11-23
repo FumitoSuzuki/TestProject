@@ -56,7 +56,7 @@
       </template>
     </b-modal>
     <!-- Stand-in static forms -->
-    <form name="conatact" netlify netlify-honeypot="bot-field" hidden>
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
       <input name="bot-field" />
       <input type="text" name="name" />
       <input type="text" name="email" />
