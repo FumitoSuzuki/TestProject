@@ -92,7 +92,7 @@ export default {
     },
     onSubmit() {
       const encodeForm = this.encode({
-        'form-name': 'example',
+        'form-name': 'contact',
         ...this.form,
       })
       console.log(encodeForm)
