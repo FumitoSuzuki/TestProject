@@ -53,7 +53,6 @@ export default {
       this.isSelected(slug) ? this.delTag(slug) : this.addTag(slug)
     },
     okSelectTag() {
-      alert('OK')
       this.$nuxt.refresh()
       this.$nextTick(() => {
         this.$bvModal.hide('select-tags')

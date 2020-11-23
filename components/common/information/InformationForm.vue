@@ -57,11 +57,12 @@
     </b-modal>
     <!-- Stand-in static forms -->
     <form name="conatact" netlify netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
       <input type="text" name="name" />
       <input type="text" name="email" />
-      <input type="text" name="phone-number" />
-      <input type="text" name="message-type" />
-      <textarea name="message-text" />
+      <input type="text" name="number" />
+      <input type="text" name="type" />
+      <textarea name="text" />
     </form>
   </section>
 </template>
@@ -94,25 +95,17 @@ export default {
         'form-name': 'example',
         ...this.form,
       })
-      this.encodeForm = encodeForm
-      /*
-            const axiosConfig = {
-              header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-              },
-            }
-      */
-      /*
-            axios.post(
-              "/", encodeForm, axiosConfig
-            ).then(() => {
-              this.$bvModal.hide('confirm')
-              this.onReset()
-            })
-      */
-      this.$bvModal.hide('confirm')
-      this.$bvModal.show('thanks')
-      this.onReset()
+      console.log(encodeForm)
+      const axiosConfig = {
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+      this.$axios.post('/', encodeForm, axiosConfig).then(() => {
+        this.$bvModal.hide('confirm')
+        this.$bvModal.show('thanks')
+        this.onReset()
+      })
     },
     onFihish() {
       this.$bvModal.hide('thanks')
