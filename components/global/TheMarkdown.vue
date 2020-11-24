@@ -6,13 +6,13 @@
 import Prism from '~/plugins/prism'
 export default {
   props: ['md'],
-  mounted() {
-    Prism.highlightAll()
-  },
   computed: {
     renderMd() {
       return this.$md.render(this.md)
     },
+  },
+  mounted() {
+    Prism.highlightAll()
   },
 }
 </script>

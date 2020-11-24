@@ -48,8 +48,11 @@
     <!-- This is thanks message window -->
     <b-modal id="thanks" title="Thanks Contact!">
       <p>
-        <Break>Thank you for your inquiry.</Break>
-        <Break>We will contact you after confirming the contents.</Break>
+        <ResponsiveBreak>
+          Thank you for your inquiry.
+          <br />
+          We will contact you after confirming the contents.
+        </ResponsiveBreak>
       </p>
       <template v-slot:modal-footer>
         <b-button variant="info" @click="onFihish">OK! 🤩</b-button>
@@ -67,6 +70,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -90,20 +94,30 @@ export default {
       this.$bvModal.show('confirm')
     },
     onSubmit() {
+      const url = '/'
       const encodeForm = this.encode({
         'form-name': 'contact',
         ...this.form,
       })
-      console.log(encodeForm)
       const axiosConfig = {
         header: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
-      this.$axios.$post('/', encodeForm, axiosConfig)
-      this.$bvModal.hide('confirm')
-      this.$bvModal.show('thanks')
-      this.onReset()
+      this.$axios
+        .$post(url, encodeForm, axiosConfig)
+        .then(() => {
+          this.$bvModal.hide('confirm')
+          this.$bvModal.show('thanks')
+          this.onReset()
+        })
+        .catch((error) => {
+          if (this.$axios.isCancel(error)) {
+            console.log('Request canceled', error)
+          } else {
+            console.log(error)
+          }
+        })
     },
     onFihish() {
       this.$bvModal.hide('thanks')

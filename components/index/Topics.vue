@@ -2,14 +2,14 @@
   <b-container>
     <AlignRowItems
       v-for="(row, key) in rows"
-      :class-name="alignTargetClass"
       :key="key"
+      :class-name="alignTargetClass"
     >
       <b-row align-v="stretch">
         <b-col
           v-for="(item, key) in row"
-          v-bind="item.columnAttr"
           :key="key"
+          v-bind="item.columnAttr"
           class="my-2 px-2"
         >
           <b-card no-body class="h-100">
