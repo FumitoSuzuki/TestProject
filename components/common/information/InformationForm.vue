@@ -61,7 +61,7 @@
       <input type="text" name="email" />
       <input type="text" name="number" />
       <input type="text" name="type" />
-      <textarea name="text" />
+      <input type="text" name="text" />
     </form>
   </section>
 </template>
@@ -100,7 +100,7 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
-      this.$axios.post('/', encodeForm, axiosConfig)
+      this.$axios.$post('/', encodeForm, axiosConfig)
       this.$bvModal.hide('confirm')
       this.$bvModal.show('thanks')
       this.onReset()
