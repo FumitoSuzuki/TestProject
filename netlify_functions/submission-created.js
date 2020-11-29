@@ -10,17 +10,31 @@ const transporter = nodemailer.createTransport({
   secure: true
 });
 
-const fromMailAddress = "fumito.suzuki@transpigeon.com";
-
 exports.handler = function (event, context, callback) {
-  const { name, email } = JSON.parse(event.body).payload.data;
+  const { name, email, type, text } = JSON.parse(event.body).payload.data;
 
   let mailOptions = {
-    from: `"Transpigeon"<${fromMailAddress}> `,
+    from: `"Transpigeon"<support@transpigeon.com> `,
     to: `${email}`,
-    subject: "Hello NodeMailer",
-    text: `${name}様 Testing...`,
-    html: `<b>${name}様 Testing...</b>`
+    subject: `【Transpigein】お問い合わせありがとうございます。`,
+    text: `${name}様
+お問い合わせありがとうございます。
+お問い合わせの受付が完了しました。
+
+本メールは自動返信メールです。
+内容を確認後、あらためて返信をさせていただきますので
+今しばらくお待ちくださいますようお願い申し上げます。
+
+お問い合わせ内容[${type}]
+${text}`,
+    html: `<b>${name}様</b>
+<p><b>お問い合わせありがとうございます。<br />
+お問い合わせの受付が完了しました。</b></p>
+<p>本メールは自動返信メールです。<br />
+内容を確認後、あらためて返信をさせていただきますので<br />
+今しばらくお待ちくださいますようお願い申し上げます。</p>
+<p><b>お問い合わせ内容[${type}]</b><br />
+${text}</p>`
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
