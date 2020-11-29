@@ -20,7 +20,8 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
-      this.$axios.$post(url, { name: 'OK' }, axiosConfig)
+      this.$axios
+        .$post(url, { name: 'OK' }, axiosConfig)
         .then(() => {
           alert('POST!')
         })
