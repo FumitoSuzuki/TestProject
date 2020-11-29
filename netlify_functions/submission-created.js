@@ -1,5 +1,3 @@
-// require('dotenv').config();
-
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
@@ -15,17 +13,15 @@ const transporter = nodemailer.createTransport({
 const fromMailAddress = "fumito.suzuki@transpigeon.com";
 
 exports.handler = function (event, context, callback) {
-  const { name, email, message } = JSON.parse(event.body).payload.data;
+  const { name, email } = JSON.parse(event.body).payload.data;
 
   let mailOptions = {
     from: `"Transpigeon"<${fromMailAddress}> `,
-    to: `khako@icloud.com`,
+    to: `${email}`,
     subject: "Hello NodeMailer",
-    text: "Testing...",
-    html: "<b>Testing2...</b>"
+    text: `${name}様 Testing...`,
+    html: `<b>${name}様 Testing...</b>`
   };
-
-  console.log(event);
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
