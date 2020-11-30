@@ -14,7 +14,7 @@ exports.handler = function (event, context, callback) {
   const { name, email, type, text } = JSON.parse(event.body).payload.data;
 
   let mailOptions = {
-    from: `"Transpigeon"<support@transpigeon.com> `,
+    from: `"Transpigeon"<fumito.suzuki@transpigeon.com> `,
     to: `${email}`,
     subject: `【Transpigein】お問い合わせありがとうございます。`,
     text: `${name}様

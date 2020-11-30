@@ -86,7 +86,6 @@ export default {
           text: '',
         },
       },
-      encodeForm: '',
     }
   },
   methods: {

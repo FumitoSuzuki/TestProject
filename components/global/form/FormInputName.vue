@@ -11,10 +11,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      name: '',
-    }
+  props: {
+    name: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     commit: {
