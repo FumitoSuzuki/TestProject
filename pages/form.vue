@@ -87,7 +87,7 @@ export default {
     onSubmit() {
       const url = '/'
       const encodeForm = this.encode({
-        'form-name': 'contact',
+        'form-name': 'testform',
         ...this.form,
       })
       const axiosConfig = {
