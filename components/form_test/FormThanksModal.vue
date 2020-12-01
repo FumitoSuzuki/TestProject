@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="thanks" title="Thanks Contact!">
+  <b-modal id="test-thanks" title="Thanks Contact!">
     <p>
       <ResponsiveBreak>
         Thank you for your inquiry.

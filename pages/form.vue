@@ -82,7 +82,7 @@ export default {
         .join('&')
     },
     onConfirm() {
-      this.$bvModal.show('confirm')
+      this.$bvModal.show('test-confirm')
     },
     onSubmit() {
       const url = '/'
@@ -98,8 +98,8 @@ export default {
       this.$axios
         .$post(url, encodeForm, axiosConfig)
         .then(() => {
-          this.$bvModal.hide('confirm')
-          this.$bvModal.show('thanks')
+          this.$bvModal.hide('test-confirm')
+          this.$bvModal.show('test-thanks')
           this.onReset()
         })
         .catch((error) => {

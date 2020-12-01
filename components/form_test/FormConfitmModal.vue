@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="confirm" title="Please Confirm." scrollable>
+  <b-modal id="test-confirm" title="Please Confirm." scrollable>
     <p>Name: {{ form.name }}</p>
     <p>Email: {{ form.email }}</p>
     <template v-slot:modal-footer>
