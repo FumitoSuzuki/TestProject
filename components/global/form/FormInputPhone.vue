@@ -7,6 +7,7 @@
             v-model="commitCountry"
             class="left-form"
             :options="country.options"
+            name="country"
           />
         </ValidationProvider>
       </template>
@@ -20,6 +21,7 @@
           v-model="commitNumber"
           type="text"
           class="right-form"
+          name="number"
         />
         <b-form-invalid-feedback :state="!errors.length">
           <p v-for="(item, key) in errors" :key="key" v-text="item" />

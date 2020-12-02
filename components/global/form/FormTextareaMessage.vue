@@ -5,6 +5,7 @@
       v-model="commitType"
       class="bg-light p-2 top-form"
       :options="type.options"
+      name="type"
     />
     <ValidationProvider rules="required" name="question">
       <b-form-textarea
@@ -14,6 +15,7 @@
         rows="6"
         debounce="500"
         class="bottom-form"
+        name="text"
       />
     </ValidationProvider>
   </b-form-group>
