@@ -1,7 +1,7 @@
 <template>
   <b-form-group label="Name" label-for="name">
     <ValidationProvider v-slot="{ errors }" rules="required" name="Name">
-      <b-form-input id="name" v-model="commit" type="text" />
+      <b-form-input id="name" v-model="commit" type="text" name="name" />
       <b-form-invalid-feedback :state="!errors.length">
         <p v-for="(item, key) in errors" :key="key" v-text="item" />
       </b-form-invalid-feedback>
@@ -12,7 +12,7 @@
 <script>
 export default {
   props: {
-    name: {
+    value: {
       type: String,
       default: '',
     },
@@ -20,11 +20,10 @@ export default {
   computed: {
     commit: {
       get() {
-        return this.name
+        return this.value
       },
       set(value) {
-        this.name = value
-        this.$emit('input', value)
+        if (this.value !== value) this.$emit('input', value)
       },
     },
   },
