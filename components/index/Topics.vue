@@ -1,8 +1,8 @@
 <template>
   <b-container>
     <AlignRowItems
-      v-for="(row, key) in rows"
-      :key="key"
+      v-for="(row, rowKey) in rows"
+      :key="rowKey"
       :class-name="alignTargetClass"
     >
       <b-row align-v="stretch">

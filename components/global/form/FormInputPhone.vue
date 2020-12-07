@@ -15,6 +15,7 @@
         v-slot="{ errors }"
         :rules="{ phone_jp: ['@phoneCountry', commitNumber] }"
         name="Phone"
+        class="w-100"
       >
         <b-form-input
           id="phone"

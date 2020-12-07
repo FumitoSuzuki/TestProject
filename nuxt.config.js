@@ -67,10 +67,10 @@ export default {
     xhtmlOut: true,
     langPrefix: "language-",
     quotes: "“”‘’",
+    use: ["markdown-it-sanitizer"],
     highlight(/* str, lang */) {
       return "";
     }
-    // use: ['markdown-it-highlightjs'],
   },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)

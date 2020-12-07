@@ -5,7 +5,12 @@
 <script>
 import Prism from '~/plugins/prism'
 export default {
-  props: ['md'],
+  props: {
+    md: {
+      type: String,
+      default: '',
+    },
+  },
   computed: {
     renderMd() {
       return this.$md.render(this.md)

@@ -17,7 +17,12 @@
 
 <script>
 export default {
-  props: ['entry'],
+  props: {
+    entry: {
+      type: Object,
+      default: () => {},
+    },
+  },
   computed: {
     updatedAt() {
       const inUTC = new Date(this.entry.updatedAt)

@@ -3,7 +3,7 @@
     <b-row class="h-100 justify-content-center" align-v="center">
       <b-col cols="4">
         <h1>Axios Example</h1>
-        <b-button @click="onSubmit()" block>Button</b-button>
+        <b-button block @click="onSubmit()">Button</b-button>
       </b-col>
     </b-row>
   </b-container>

@@ -33,10 +33,10 @@
           <b-col>
             <b-form-group label="Email" label-for="email">
               <b-form-input
-                name="email"
                 id="email"
                 v-model="form.email"
                 type="text"
+                name="email"
               />
             </b-form-group>
           </b-col>

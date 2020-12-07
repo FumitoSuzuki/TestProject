@@ -7,8 +7,14 @@
 <script>
 export default {
   props: {
-    className: Array,
-    trigger: Array,
+    className: {
+      type: Array,
+      default: () => [],
+    },
+    trigger: {
+      type: Array,
+      default: () => [],
+    },
   },
   watch: {
     trigger: {
