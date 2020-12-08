@@ -1,15 +1,15 @@
 <template>
   <b-container>
     <AlignRowItems
-      v-for="(row, key) in rows"
+      v-for="(row, rowKey) in rows"
+      :key="rowKey"
       :class-name="alignTargetClass"
-      :key="key"
     >
       <b-row align-v="stretch">
         <b-col
           v-for="(item, key) in row"
-          v-bind="item.columnAttr"
           :key="key"
+          v-bind="item.columnAttr"
           class="my-2 px-2"
         >
           <b-card no-body class="h-100">

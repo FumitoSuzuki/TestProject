@@ -4,7 +4,12 @@
 
 <script>
 export default {
-  props: ['variant'],
+  props: {
+    variant: {
+      type: String,
+      default: 'Primary',
+    },
+  },
   methods: {
     histryBack() {
       this.$router.go(-1)

@@ -19,7 +19,12 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  props: ['slugs'],
+  props: {
+    slugs: {
+      type: Array,
+      default: () => [],
+    },
+  },
   computed: {
     ...mapGetters('relation', ['getRelationItemsFromSlugs']),
     relations() {

@@ -7,6 +7,7 @@
             v-model="commitCountry"
             class="left-form"
             :options="country.options"
+            name="country"
           />
         </ValidationProvider>
       </template>
@@ -14,12 +15,14 @@
         v-slot="{ errors }"
         :rules="{ phone_jp: ['@phoneCountry', commitNumber] }"
         name="Phone"
+        class="w-100"
       >
         <b-form-input
           id="phone"
           v-model="commitNumber"
           type="text"
           class="right-form"
+          name="number"
         />
         <b-form-invalid-feedback :state="!errors.length">
           <p v-for="(item, key) in errors" :key="key" v-text="item" />
@@ -31,41 +34,46 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: Object,
+      default: () => {
+        return {
+          country: 'jp',
+          number: '',
+        }
+      },
+    },
+  },
   data() {
     return {
       country: {
-        selected: 'jp',
         options: [
           { text: 'Japan', value: 'jp' },
           { text: 'Other', value: 'other' },
         ],
       },
-      number: '',
     }
   },
   computed: {
     commitCountry: {
       get() {
-        return this.country.selected
+        return this.value.country
       },
-      set(value) {
-        this.country.selected = value
-        this.commitNumber = this.number
+      set(country) {
+        if (this.value.country !== country) {
+          this.$emit('input', { country, number: this.value.number })
+        }
       },
     },
     commitNumber: {
       get() {
-        return this.number
+        return this.value.number
       },
-      set(value) {
-        const options = this.country.options
-        const selected = this.country.selected
-        const country = options.find((item) => item.value === selected)
-        this.number = value
-        this.$emit('input', {
-          country: country.text,
-          number: value,
-        })
+      set(number) {
+        if (this.value.number !== number) {
+          this.$emit('input', { country: this.value.country, number })
+        }
       },
     },
   },

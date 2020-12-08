@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  props: ['entry'],
+  props: {
+    entry: {
+      type: Object,
+      default: () => {},
+    },
+  },
   computed: {
     pageNum() {
       return this.$store.state.contentful.pageNumber

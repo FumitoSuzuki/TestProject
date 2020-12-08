@@ -1,73 +1,41 @@
 <template>
-  <section id="form">
+  <b-form ref="form" @submit.prevent="onConfirm" @reset="onReset">
     <!-- This is Input Form. This Form is not submitted. -->
-    <b-form ref="form" @submit.prevent="onConfirm" @reset="onReset">
-      <ValidationObserver ref="observer" v-slot="{ invalid }">
-        <b-form-row>
-          <b-col cols="12" md="3">
-            <FormInputName v-model="form.name" />
-          </b-col>
-          <b-col cols="12" md="4">
-            <FormInputEmail v-model="form.email" />
-          </b-col>
-          <b-col cols="12" md="5">
-            <FormInputPhone v-model="form.phone" />
-          </b-col>
-        </b-form-row>
-        <b-form-row>
-          <b-col cols="12">
-            <FormTextareaMessage v-model="form.message" />
-          </b-col>
-        </b-form-row>
-        <b-row align-h="center" class="mt-3">
-          <b-col cols="4">
-            <b-button
-              v-b-modal.confirm
-              block
-              variant="primary"
-              :disabled="invalid"
-            >
-              Confirm
-            </b-button>
-          </b-col>
-        </b-row>
-      </ValidationObserver>
-    </b-form>
+    <ValidationObserver ref="observer" v-slot="{ invalid }">
+      <b-form-row>
+        <b-col cols="12" md="3">
+          <FormInputName v-model="form.name" />
+        </b-col>
+        <b-col cols="12" md="4">
+          <FormInputEmail v-model="form.email" />
+        </b-col>
+        <b-col cols="12" md="5">
+          <FormInputPhone v-model="form.phone" />
+        </b-col>
+      </b-form-row>
+      <b-form-row>
+        <b-col cols="12">
+          <FormTextareaMessage v-model="form.message" />
+        </b-col>
+      </b-form-row>
+      <b-row align-h="center" class="mt-3">
+        <b-col cols="4">
+          <b-button block :disabled="invalid" type="submit" variant="primary">
+            Confirm
+          </b-button>
+        </b-col>
+      </b-row>
+    </ValidationObserver>
     <!-- This is Input confirmaition window -->
-    <b-modal id="confirm" title="Please Confirm." scrollable>
-      <p>Name: {{ form.name }}</p>
-      <p>Email: {{ form.email }}</p>
-      <p>Phone: {{ form.phone.number }}</p>
-      <p>Message: {{ form.message.type }}</p>
-      <p>{{ form.message.text }}</p>
-      <template v-slot:modal-footer>
-        <b-button @click="$bvModal.hide('confirm')">Cancel</b-button>
-        <b-button variant="info" @click="onSubmit">Submit! 🤩</b-button>
-      </template>
-    </b-modal>
+    <InformationFormConfirmModal :param="form" @event="onSubmit" />
     <!-- This is thanks message window -->
-    <b-modal id="thanks" title="Thanks Contact!">
-      <p>
-        <Break>Thank you for your inquiry.</Break>
-        <Break>We will contact you after confirming the contents.</Break>
-      </p>
-      <template v-slot:modal-footer>
-        <b-button variant="info" @click="onFihish">OK! 🤩</b-button>
-      </template>
-    </b-modal>
+    <InformationFormThanksModal />
     <!-- Stand-in static forms -->
-    <form name="conatact" netlify netlify-honeypot="bot-field" hidden>
-      <input name="bot-field" />
-      <input type="text" name="name" />
-      <input type="text" name="email" />
-      <input type="text" name="number" />
-      <input type="text" name="type" />
-      <textarea name="text" />
-    </form>
-  </section>
+  </b-form>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -75,15 +43,14 @@ export default {
         name: '',
         email: '',
         phone: {
-          country: '',
+          country: 'jp',
           number: '',
         },
         message: {
-          type: '',
+          type: 'How to',
           text: '',
         },
       },
-      encodeForm: '',
     }
   },
   methods: {
@@ -91,28 +58,34 @@ export default {
       this.$bvModal.show('confirm')
     },
     onSubmit() {
+      const url = '/'
       const encodeForm = this.encode({
-        'form-name': 'example',
+        'form-name': 'contact',
         ...this.form,
       })
-      console.log(encodeForm)
       const axiosConfig = {
         header: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
-      this.$axios.post('/', encodeForm, axiosConfig)
-      this.$bvModal.hide('confirm')
-      this.$bvModal.show('thanks')
-      this.onReset()
-    },
-    onFihish() {
-      this.$bvModal.hide('thanks')
+      this.$axios
+        .$post(url, encodeForm, axiosConfig)
+        .then(() => {
+          this.$bvModal.hide('confirm')
+          this.$bvModal.show('thanks')
+          this.onReset()
+        })
+        .catch((error) => {
+          if (this.$axios.isCancel(error)) {
+            console.log('Request canceled', error)
+          } else {
+            console.log(error)
+          }
+        })
     },
     onReset() {
-      this.$refs.form.reset()
-      this.$refs.observer.reset()
       Object.assign(this.$data, this.$options.data.call(this))
+      this.$refs.observer.reset()
     },
     encode(data) {
       return Object.keys(data)

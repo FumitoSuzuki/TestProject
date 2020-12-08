@@ -4,9 +4,9 @@
       v-for="(item, key) in selectTags"
       :key="key"
       class="m-1"
-      @click="delTag(item.slug)"
       style="cursor: pointer"
       variant="light"
+      @click="delTag(item.slug)"
     >
       # {{ item.name }}
     </b-badge>

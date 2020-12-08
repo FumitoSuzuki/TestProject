@@ -5,6 +5,7 @@
       v-model="commitType"
       class="bg-light p-2 top-form"
       :options="type.options"
+      name="type"
     />
     <ValidationProvider rules="required" name="question">
       <b-form-textarea
@@ -14,6 +15,7 @@
         rows="6"
         debounce="500"
         class="bottom-form"
+        name="text"
       />
     </ValidationProvider>
   </b-form-group>
@@ -21,41 +23,46 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: Object,
+      default: () => {
+        return {
+          type: '',
+          text: '',
+        }
+      },
+    },
+  },
   data() {
     return {
       type: {
-        selected: 1,
         options: [
-          { text: 'How to', value: 1 },
-          { text: 'Others ?', value: 2 },
+          { text: 'How to', value: 'How to' },
+          { text: 'Others', value: 'Others' },
         ],
       },
-      text: '',
     }
   },
   computed: {
     commitType: {
       get() {
-        return this.type.selected
+        return this.value.type
       },
-      set(value) {
-        this.type.selected = value
-        this.commitText = this.text
+      set(type) {
+        if (this.value.type !== type) {
+          this.$emit('input', { type, text: this.value.text })
+        }
       },
     },
     commitText: {
       get() {
-        return this.text
+        return this.value.text
       },
-      set(value) {
-        const options = this.type.options
-        const selected = this.type.selected
-        const type = options.find((item) => item.value === selected)
-        this.text = value
-        this.$emit('input', {
-          type: type.text,
-          text: value,
-        })
+      set(text) {
+        if (this.value.text !== text) {
+          this.$emit('input', { type: this.value.type, text })
+        }
       },
     },
   },
