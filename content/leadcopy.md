@@ -1,7 +1,5 @@
 ## The Intuitive Vue Framework
 
-柴田さんこんにちわ！
-
 Build your next Vue.js application with confidence using NuxtJS.  
 An open source framework making web development simple and powerful.
 
