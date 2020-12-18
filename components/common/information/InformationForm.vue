@@ -19,9 +19,6 @@
         </b-col>
       </b-form-row>
       <b-row align-h="center" class="mt-3">
-        <b-col cols="2">
-          <b-button block type="reset" variant="warning">Reset</b-button>
-        </b-col>
         <b-col cols="4">
           <b-button block :disabled="invalid" type="submit" variant="primary">
             Confirm
